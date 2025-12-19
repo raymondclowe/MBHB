@@ -269,7 +269,7 @@
             
             // Validate inputs
             if (!badHabit || !example1Problem || !example1Answer || !newProblem) {
-                alert('Please fill in at least the bad habit description, Example 1, and the new practice problem.');
+                alert('Please fill in the required fields:\n- Bad Habit Description\n- Example 1 (Problem and Complete Answer)\n- New Practice Problem');
                 return;
             }
             
@@ -317,11 +317,16 @@
             
             // Practice problem
             const blankedNewAnswer = blankOutMistake(newAnswer, newKeyMistake);
+            const answerHtml = newAnswer ? 
+                `<p><strong>Answer:</strong> ${blankedNewAnswer}</p>
+                <p class="hint">Complete the answer by filling in the blank. Pay special attention to avoid the bad habit!</p>` :
+                `<p><strong>Answer:</strong> <span class="answer-line" style="min-width: 400px;"></span></p>
+                <p class="hint">Write the complete answer above. Pay special attention to avoid the bad habit!</p>`;
+            
             document.getElementById('practiceProblem').innerHTML = `
                 <h3>Your Turn - Practice Problem</h3>
                 <p><strong>Problem:</strong> ${escapeHtml(newProblem)}</p>
-                <p><strong>Answer:</strong> ${blankedNewAnswer}</p>
-                <p class="hint">Complete the answer by filling in the blank. Pay special attention to avoid the bad habit!</p>
+                ${answerHtml}
             `;
             
             // Show worksheet, hide form
@@ -341,8 +346,8 @@
             // Create a blank line for writing
             const blankLine = '<span class="answer-line"></span>';
             
-            // Replace the mistake field with the blank line
-            const result = escapedAnswer.replace(escapedMistake, blankLine);
+            // Replace all occurrences of the mistake field with the blank line
+            const result = escapedAnswer.replaceAll(escapedMistake, blankLine);
             
             return result;
         }
