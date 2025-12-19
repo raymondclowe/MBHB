@@ -6,7 +6,7 @@ const path = require('path');
 
 /**
  * Main application for generating Math Bad Habit Breaker worksheets
- * Uses OpenRouter API to access Gemini 3 Pro for generating HTML/JavaScript worksheets
+ * Uses OpenRouter API to access Gemini 2.0 Flash for generating HTML/JavaScript worksheets
  */
 
 // Configuration
@@ -46,7 +46,8 @@ Generate a complete, self-contained HTML file that:
 The HTML should be printable and professional-looking with CSS styling.
 
 IMPORTANT REQUIREMENTS:
-- The JavaScript must use eval() for calculations to ensure answers are numerically correct
+- The JavaScript must use eval() or Function constructor for calculations to ensure answers are numerically correct
+- NOTE: Only use eval() on internally generated mathematical expressions, never on user input
 - Questions must use variables and formulas, not hardcoded numbers
 - Include a "Show Answers" button that reveals the answer sheet on a new page/section
 - Make it printer-friendly with proper page breaks

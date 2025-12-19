@@ -191,6 +191,7 @@
                 }
             },
             // Trick questions (no negative distribution needed)
+            // Note: The asterisk (*) at the end of the question marks it as a trick question
             {
                 type: 'trick',
                 level: 'trick',
@@ -198,7 +199,7 @@
                     const a = Math.floor(Math.random() * 10) + 1;
                     const b = Math.floor(Math.random() * 10) + 1;
                     return {
-                        question: `Simplify: (${a} + ${b}) *`,
+                        question: `Simplify: (${a} + ${b}) *`,  // * indicates trick question
                         answer: `${a + b}`,
                         steps: [`No negative sign - just add: ${a + b}`],
                         isTrick: true
