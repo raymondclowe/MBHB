@@ -28,6 +28,13 @@ async function main() {
         // Read worksheet data
         const data = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
         
+        // Validate required fields
+        if (!data.bad_habit || !data.example1 || !data.example2 || !data.problem) {
+            console.error('Error: Missing required fields in data file');
+            console.error('Required: bad_habit, example1, example2, problem');
+            process.exit(1);
+        }
+        
         const { bad_habit, example1, example2, problem } = data;
         
         console.log('Generating worksheet...');

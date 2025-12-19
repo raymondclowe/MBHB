@@ -41,7 +41,7 @@ class GeneratedWorksheet(db.Model):
     @property
     def improvement_percentage(self):
         """Calculate improvement percentage if both rates are available"""
-        if self.pre_worksheet_error_rate and self.post_worksheet_error_rate:
+        if self.pre_worksheet_error_rate is not None and self.post_worksheet_error_rate is not None:
             if self.pre_worksheet_error_rate == 0:
                 return 0
             return ((self.pre_worksheet_error_rate - self.post_worksheet_error_rate) / 

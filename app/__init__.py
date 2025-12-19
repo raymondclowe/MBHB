@@ -18,7 +18,13 @@ def create_app(config_name='default'):
     app = Flask(__name__)
     
     # Configuration
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
+    secret_key = os.environ.get('SECRET_KEY')
+    if not secret_key:
+        if config_name == 'production':
+            raise ValueError('SECRET_KEY environment variable must be set in production')
+        secret_key = 'dev-secret-key-change-in-production'
+    
+    app.config['SECRET_KEY'] = secret_key
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///mbhb.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['HOMEWORK_FOLDER'] = os.environ.get('HOMEWORK_FOLDER', './homework_submissions')
