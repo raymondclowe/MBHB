@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Bad Habit Breaker - Worksheet Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #555;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        textarea {
+            min-height: 100px;
+            font-family: monospace;
+        }
+        
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background: #45a049;
+        }
+        
+        .example-section {
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .worksheet {
+            display: none;
+        }
+        
+        .worksheet.active {
+            display: block;
+        }
+        
+        @media print {
+            .generator-form {
+                display: none;
+            }
+            
+            .worksheet {
+                display: block !important;
+            }
+            
+            body {
+                max-width: none;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+        
+        .worksheet {
+            background: white;
+            padding: 40px;
+        }
+        
+        .worksheet h1 {
+            border-bottom: 3px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        .problem-explanation {
+            background: #fffbcc;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .example-box {
+            background: #f9f9f9;
+            border: 2px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .example-box h3 {
+            margin-top: 0;
+            color: #2196F3;
+        }
+        
+        .answer-line {
+            border-bottom: 2px solid #333;
+            display: inline-block;
+            min-width: 300px;
+            height: 30px;
+            margin: 0 10px;
+        }
+        
+        .practice-problem {
+            background: #e8f5e9;
+            border: 3px solid #4CAF50;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+        
+        .practice-problem h3 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+        
+        .hint {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .back-button {
+            background: #2196F3;
+            margin-right: 10px;
+        }
+        
+        .back-button:hover {
+            background: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <div class="generator-form" id="generatorForm">
+        <h1>Math Bad Habit Breaker - Worksheet Generator</h1>
+        
+        <div class="container">
+            <h2>Create Your Worksheet</h2>
+            <p>This tool generates a printable worksheet to help break bad math habits through deliberate practice.</p>
+            
+            <label for="badHabit">Bad Habit Description:</label>
+            <textarea id="badHabit" placeholder="Describe the bad habit you want to break (e.g., 'Students often forget to distribute the negative sign when expanding -(a+b)')"></textarea>
+            
+            <label for="aiPrompt">AI Template Prompt:</label>
+            <textarea id="aiPrompt" placeholder="Enter the template prompt that explains the problem pattern and solution approach"></textarea>
+            
+            <div class="example-section">
+                <h3>Example 1</h3>
+                <label for="example1Problem">Problem:</label>
+                <input type="text" id="example1Problem" placeholder="e.g., Simplify: -(3x + 5)">
+                
+                <label for="example1Answer">Complete Answer:</label>
+                <input type="text" id="example1Answer" placeholder="e.g., -3x - 5">
+                
+                <label for="example1KeyMistake">Key Mistake Field (what should be blanked):</label>
+                <input type="text" id="example1KeyMistake" placeholder="e.g., - 5 (the part students often get wrong)">
+            </div>
+            
+            <div class="example-section">
+                <h3>Example 2</h3>
+                <label for="example2Problem">Problem:</label>
+                <input type="text" id="example2Problem" placeholder="e.g., Simplify: -(2y - 7)">
+                
+                <label for="example2Answer">Complete Answer:</label>
+                <input type="text" id="example2Answer" placeholder="e.g., -2y + 7">
+                
+                <label for="example2KeyMistake">Key Mistake Field (what should be blanked):</label>
+                <input type="text" id="example2KeyMistake" placeholder="e.g., + 7 (the part students often get wrong)">
+            </div>
+            
+            <div class="example-section">
+                <h3>New Practice Problem</h3>
+                <label for="newProblem">Problem:</label>
+                <input type="text" id="newProblem" placeholder="e.g., Simplify: -(4a + 9)">
+                
+                <label for="newAnswer">Complete Answer (for your reference):</label>
+                <input type="text" id="newAnswer" placeholder="e.g., -4a - 9">
+                
+                <label for="newKeyMistake">Key Mistake Field (what should be blanked):</label>
+                <input type="text" id="newKeyMistake" placeholder="e.g., - 9">
+            </div>
+            
+            <button onclick="generateWorksheet()">Generate Worksheet</button>
+        </div>
+    </div>
+    
+    <div class="worksheet" id="worksheet">
+        <button class="no-print back-button" onclick="backToForm()">← Back to Form</button>
+        <button class="no-print" onclick="window.print()">🖨️ Print Worksheet</button>
+        
+        <h1 id="worksheetTitle">Math Bad Habit Breaker</h1>
+        
+        <div class="problem-explanation" id="problemExplanation">
+            <!-- Problem explanation will be inserted here -->
+        </div>
+        
+        <div id="aiPromptSection">
+            <!-- AI prompt will be inserted here -->
+        </div>
+        
+        <div class="example-box" id="example1Box">
+            <!-- Example 1 will be inserted here -->
+        </div>
+        
+        <div class="example-box" id="example2Box">
+            <!-- Example 2 will be inserted here -->
+        </div>
+        
+        <div class="practice-problem" id="practiceProblem">
+            <!-- Practice problem will be inserted here -->
+        </div>
+    </div>
+    
+    <script>
+        function generateWorksheet() {
+            // Get all input values
+            const badHabit = document.getElementById('badHabit').value;
+            const aiPrompt = document.getElementById('aiPrompt').value;
+            
+            const example1Problem = document.getElementById('example1Problem').value;
+            const example1Answer = document.getElementById('example1Answer').value;
+            const example1KeyMistake = document.getElementById('example1KeyMistake').value;
+            
+            const example2Problem = document.getElementById('example2Problem').value;
+            const example2Answer = document.getElementById('example2Answer').value;
+            const example2KeyMistake = document.getElementById('example2KeyMistake').value;
+            
+            const newProblem = document.getElementById('newProblem').value;
+            const newAnswer = document.getElementById('newAnswer').value;
+            const newKeyMistake = document.getElementById('newKeyMistake').value;
+            
+            // Validate inputs
+            if (!badHabit || !example1Problem || !example1Answer || !newProblem) {
+                alert('Please fill in at least the bad habit description, Example 1, and the new practice problem.');
+                return;
+            }
+            
+            // Generate worksheet content
+            document.getElementById('worksheetTitle').textContent = 'Math Bad Habit Breaker Worksheet';
+            
+            document.getElementById('problemExplanation').innerHTML = `
+                <h2>Bad Habit to Break:</h2>
+                <p>${escapeHtml(badHabit)}</p>
+            `;
+            
+            if (aiPrompt) {
+                document.getElementById('aiPromptSection').innerHTML = `
+                    <div class="problem-explanation" style="background: #e3f2fd;">
+                        <h2>Understanding the Pattern:</h2>
+                        <p>${escapeHtml(aiPrompt)}</p>
+                    </div>
+                `;
+            } else {
+                document.getElementById('aiPromptSection').innerHTML = '';
+            }
+            
+            // Example 1
+            const blankedAnswer1 = blankOutMistake(example1Answer, example1KeyMistake);
+            document.getElementById('example1Box').innerHTML = `
+                <h3>Example 1</h3>
+                <p><strong>Problem:</strong> ${escapeHtml(example1Problem)}</p>
+                <p><strong>Answer:</strong> ${blankedAnswer1}</p>
+                <p class="hint">Fill in the blank above by hand to practice avoiding the bad habit.</p>
+            `;
+            
+            // Example 2
+            if (example2Problem && example2Answer) {
+                const blankedAnswer2 = blankOutMistake(example2Answer, example2KeyMistake);
+                document.getElementById('example2Box').innerHTML = `
+                    <h3>Example 2</h3>
+                    <p><strong>Problem:</strong> ${escapeHtml(example2Problem)}</p>
+                    <p><strong>Answer:</strong> ${blankedAnswer2}</p>
+                    <p class="hint">Fill in the blank above by hand to practice avoiding the bad habit.</p>
+                `;
+                document.getElementById('example2Box').style.display = 'block';
+            } else {
+                document.getElementById('example2Box').style.display = 'none';
+            }
+            
+            // Practice problem
+            const blankedNewAnswer = blankOutMistake(newAnswer, newKeyMistake);
+            document.getElementById('practiceProblem').innerHTML = `
+                <h3>Your Turn - Practice Problem</h3>
+                <p><strong>Problem:</strong> ${escapeHtml(newProblem)}</p>
+                <p><strong>Answer:</strong> ${blankedNewAnswer}</p>
+                <p class="hint">Complete the answer by filling in the blank. Pay special attention to avoid the bad habit!</p>
+            `;
+            
+            // Show worksheet, hide form
+            document.getElementById('generatorForm').style.display = 'none';
+            document.getElementById('worksheet').classList.add('active');
+        }
+        
+        function blankOutMistake(fullAnswer, mistakeField) {
+            if (!mistakeField || !fullAnswer) {
+                return escapeHtml(fullAnswer);
+            }
+            
+            // Find and replace the mistake field with a blank line
+            const escapedAnswer = escapeHtml(fullAnswer);
+            const escapedMistake = escapeHtml(mistakeField);
+            
+            // Create a blank line for writing
+            const blankLine = '<span class="answer-line"></span>';
+            
+            // Replace the mistake field with the blank line
+            const result = escapedAnswer.replace(escapedMistake, blankLine);
+            
+            return result;
+        }
+        
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function backToForm() {
+            document.getElementById('generatorForm').style.display = 'block';
+            document.getElementById('worksheet').classList.remove('active');
+        }
+        
+        // Load example data on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            // Pre-fill with example data
+            document.getElementById('badHabit').value = 'Students often forget to distribute the negative sign when expanding -(a+b), writing -(a+b) = -a+b instead of -a-b';
+            document.getElementById('aiPrompt').value = 'When you have a negative sign in front of parentheses, you must distribute it to EVERY term inside. -(a+b) means -1×(a+b) = -1×a + (-1)×b = -a - b. Remember: the negative affects ALL terms.';
+            
+            document.getElementById('example1Problem').value = 'Simplify: -(3x + 5)';
+            document.getElementById('example1Answer').value = '-3x - 5';
+            document.getElementById('example1KeyMistake').value = '- 5';
+            
+            document.getElementById('example2Problem').value = 'Simplify: -(2y - 7)';
+            document.getElementById('example2Answer').value = '-2y + 7';
+            document.getElementById('example2KeyMistake').value = '+ 7';
+            
+            document.getElementById('newProblem').value = 'Simplify: -(4a + 9)';
+            document.getElementById('newAnswer').value = '-4a - 9';
+            document.getElementById('newKeyMistake').value = '- 9';
+        });
+    </script>
+</body>
+</html>
