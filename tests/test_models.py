@@ -15,9 +15,9 @@ class TestStudent:
     def test_create_student(self, app):
         """Test creating a student"""
         with app.app_context():
-            # Use a unique ID to avoid conflicts
-            import random
-            unique_id = f'STU{random.randint(1000, 9999)}'
+            # Use UUID to guarantee uniqueness across test runs
+            import uuid
+            unique_id = f'STU{str(uuid.uuid4())[:8]}'
             
             student = Student(
                 student_id=unique_id,

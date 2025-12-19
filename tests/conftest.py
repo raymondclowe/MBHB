@@ -19,7 +19,9 @@ def app():
         'SQLALCHEMY_DATABASE_URI': f'sqlite:///{db_path}',
         'WTF_CSRF_ENABLED': False,
         'SECRET_KEY': 'test-secret-key',
-        'LOGIN_DISABLED': True  # Disable Flask-Login for testing
+        # Disable authentication for tests - this should NEVER be used in production
+        # Tests run in isolated environment and don't require user authentication
+        'LOGIN_DISABLED': True
     })
     
     # Add a dummy user_loader to satisfy Flask-Login

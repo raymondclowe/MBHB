@@ -21,26 +21,32 @@ class TestAnalysisService:
                 json.dump(sample_homework_data, f)
                 temp_path = f.name
             
-            # Process the submission
-            result = AnalysisService.process_json_submission(temp_path)
-            
-            assert result['success'] is True
-            assert 'submission_id' in result
-            assert result['mistakes'] == 2
-            
-            # Verify student was created
-            student = Student.query.filter_by(student_id='TEST001').first()
-            assert student is not None
-            
-            # Verify submission was created
-            submission = HomeworkSubmission.query.get(result['submission_id'])
-            assert submission is not None
-            assert submission.total_questions == 2
-            assert submission.total_mistakes == 2
-            
-            # Verify mistakes were created
-            mistakes = Mistake.query.filter_by(submission_id=submission.id).all()
-            assert len(mistakes) == 2
+            try:
+                # Process the submission
+                result = AnalysisService.process_json_submission(temp_path)
+                
+                assert result['success'] is True
+                assert 'submission_id' in result
+                assert result['mistakes'] == 2
+                
+                # Verify student was created
+                student = Student.query.filter_by(student_id='TEST001').first()
+                assert student is not None
+                
+                # Verify submission was created
+                submission = HomeworkSubmission.query.get(result['submission_id'])
+                assert submission is not None
+                assert submission.total_questions == 2
+                assert submission.total_mistakes == 2
+                
+                # Verify mistakes were created
+                mistakes = Mistake.query.filter_by(submission_id=submission.id).all()
+                assert len(mistakes) == 2
+            finally:
+                # Clean up temporary file
+                import os
+                if os.path.exists(temp_path):
+                    os.unlink(temp_path)
     
     def test_match_mistake_to_category(self, app):
         """Test mistake matching to categories"""
