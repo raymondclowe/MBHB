@@ -36,6 +36,10 @@ This tool generates custom HTML worksheets that help students practice avoiding 
 
 The default example addresses the common mistake of forgetting to distribute negative signs when expanding expressions like -(a+b). Students often write -(a+b) = -a+b instead of the correct -a-b.
 
+## Example Worksheets
+
+See `example-fraction-addition.html` for a static example worksheet demonstrating the output format. This shows what a completed worksheet looks like for the common fraction addition mistake.
+
 ## Technical Details
 
 - Self-contained HTML/JavaScript file (no external dependencies)
