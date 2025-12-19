@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}About - MBHB Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">About MBHB</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Math Bad Habit Breaker</h3>
+        <p class="lead">An AI-powered student performance analysis and adaptive worksheet generation system.</p>
+        
+        <h4>Features</h4>
+        <ul>
+            <li>Automated homework analysis from AI systems</li>
+            <li>Mistake categorization and tracking</li>
+            <li>Performance metrics and trend analysis</li>
+            <li>Priority-based worksheet generation</li>
+            <li>IB HL AA Mathematics exam-optimized</li>
+        </ul>
+        
+        <h4>How It Works</h4>
+        <ol>
+            <li>System monitors homework folder for new submissions</li>
+            <li>AI-analyzed homework files (JSON format) are automatically processed</li>
+            <li>Mistakes are categorized and tracked over time</li>
+            <li>Performance metrics calculate priority scores based on frequency and exam weight</li>
+            <li>Targeted worksheets are generated for high-priority mistake categories</li>
+            <li>Student progress is tracked after worksheet completion</li>
+        </ol>
+        
+        <h4>System Status</h4>
+        <div class="alert alert-success">
+            <i class="bi bi-check-circle"></i> System Operational
+        </div>
+    </div>
+</div>
+{% endblock %}

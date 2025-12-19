@@ -1,0 +1,59 @@
+{
+  "student_id": "DEMO001",
+  "student_name": "Demo Student",
+  "homework_date": "2024-01-15",
+  "questions": [
+    {
+      "question_number": 1,
+      "topic": "Algebra - Quadratic Equations",
+      "student_answer": "x = 5",
+      "correct_answer": "x = ±5",
+      "mistakes": [
+        {
+          "type": "missing_negative_root",
+          "description": "Student forgot negative solution when solving x² = 25",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "question_number": 2,
+      "topic": "Algebra - Equation Solving",
+      "student_answer": "x = 10 + 5 = 15",
+      "correct_answer": "x = 10 - 5 = 5",
+      "mistakes": [
+        {
+          "type": "sign_change_error",
+          "description": "Did not change sign when moving term: x + 5 = 10 → x = 10 + 5",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "question_number": 3,
+      "topic": "Calculus - Integration",
+      "student_answer": "∫2x dx = x²",
+      "correct_answer": "∫2x dx = x² + C",
+      "mistakes": [
+        {
+          "type": "missing_integration_constant",
+          "description": "Forgot to add constant of integration +C",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "question_number": 4,
+      "topic": "Algebra - Negative Distribution",
+      "student_answer": "-(3 + x) = -3 + x",
+      "correct_answer": "-(3 + x) = -3 - x",
+      "mistakes": [
+        {
+          "type": "negative_sign_distribution",
+          "description": "Did not distribute negative to both terms",
+          "severity": "high"
+        }
+      ]
+    }
+  ]
+}

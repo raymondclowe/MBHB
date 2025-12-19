@@ -1,45 +1,90 @@
 # MBHB - Math Bad Habit Breaker
 
-An AI-powered worksheet generator that creates targeted practice materials to help students break specific math bad habits through progressive practice.
+A comprehensive AI-powered system for student performance analysis and adaptive worksheet generation. MBHB automatically monitors student homework, analyzes mistakes, tracks performance patterns, and generates targeted practice worksheets to help students break bad math habits.
 
-## Overview
+## 🎯 System Overview
 
-MBHB uses AI (via OpenRouter and Gemini 2.0 Flash) to generate interactive HTML worksheets that:
-- Focus on a specific math bad habit
-- Provide worked examples with strategic blanks
-- Generate progressive practice questions (from partial blanks to complete solutions)
-- Include "trick" questions that test understanding
-- Calculate correct answers using JavaScript eval() for numerical accuracy
-- Provide a separate answer sheet for verification
+MBHB consists of two integrated components:
 
-## Features
+### 1. **Flask Web Application** (NEW)
+- **Admin Panel**: Web-based interface for managing students and viewing analytics
+- **File Monitoring**: Automatically processes submitted homework
+- **Analysis Engine**: Categorizes mistakes and tracks performance
+- **Performance Metrics**: Calculates trends, priorities, and improvement rates
+- **Automated Worksheet Generation**: Creates targeted practice based on student needs
 
-- **AI-Generated Content**: Uses Gemini 2.0 Flash via OpenRouter to create custom worksheets
-- **Progressive Difficulty**: Questions start with minimal blanks and progress to complete solutions
-- **Trick Questions**: Interspersed questions that are similar but don't require the bad habit correction
-- **Dynamic Calculations**: JavaScript generates and validates all numeric values
-- **Printable Format**: Professional, printer-friendly HTML with proper formatting
-- **Answer Sheets**: Hidden answer sheets that can be revealed or printed separately
+### 2. **Worksheet Generator** (Original)
+- AI-powered HTML/JavaScript worksheet creation
+- Progressive difficulty with strategic blanks
+- Dynamic calculations with eval()
+- Trick questions for conceptual testing
+- Self-contained, printable worksheets
 
-## Installation
+## ✨ Key Features
 
-1. Clone the repository:
+### Performance Analysis System
+- **Automated Homework Monitoring**: Watches folder for new submissions
+- **AI Analysis Integration**: Processes AI-analyzed homework (JSON format)
+- **Mistake Categorization**: 15+ pre-configured IB HL AA Math categories
+- **Trend Analysis**: Tracks improving, declining, or stable performance
+- **Priority Scoring**: Calculates worksheet priorities based on frequency × exam weight × recency
+
+### Student Tracking
+- **Individual Profiles**: Complete performance history per student
+- **Performance Metrics**: Recent vs. historical mistake rates
+- **Progress Monitoring**: Track improvement after targeted practice
+- **Dashboard Views**: Visual analytics and trends
+
+### Worksheet Generation
+- **AI-Generated Content**: Uses Gemini 2.0 Flash via OpenRouter
+- **Priority-Based**: Automatically targets highest-priority mistake categories
+- **Progressive Difficulty**: Questions progress from partial to complete solutions
+- **Trick Questions**: Test conceptual understanding
+- **Dynamic Calculations**: JavaScript with eval() for numerical accuracy
+- **Exam-Optimized**: Prioritized by IB HL AA Mathematics point values
+
+## 🚀 Quick Start
+
+### Option 1: Full System (Flask + Worksheet Generator)
+
+1. **Clone and Install**:
 ```bash
 git clone https://github.com/raymondclowe/MBHB.git
 cd MBHB
-```
 
-2. Install dependencies:
-```bash
+# Install Node.js dependencies
 npm install
+
+# Install Python dependencies
+pip install -r requirements.txt
 ```
 
-3. Set up your OpenRouter API key:
+2. **Configure**:
 ```bash
 export OPENROUTER_API_KEY="your-api-key-here"
 ```
-
 Get your API key from [OpenRouter](https://openrouter.ai/keys)
+
+3. **Run**:
+```bash
+# Terminal 1: Start Flask web app
+python run.py
+
+# Terminal 2: Start file monitor
+python monitor.py
+```
+
+4. **Access**: Open http://localhost:5000
+
+### Option 2: Worksheet Generator Only (Original)
+
+```bash
+npm install
+export OPENROUTER_API_KEY="your-key"
+npm run cli  # Interactive mode
+```
+
+See [FLASK_SETUP.md](FLASK_SETUP.md) for detailed Flask setup instructions
 
 ## Usage
 
