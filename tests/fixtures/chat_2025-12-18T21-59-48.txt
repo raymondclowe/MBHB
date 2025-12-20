@@ -1,0 +1,20 @@
+[2025-12-18 21:59:48] USER: Hi
+[2025-12-18 21:59:59] ASSISTANT: Hello! It's great to meet you.
+
+I’m here to help you master **IB Mathematics: Analysis & Approaches (AA) Higher Level**. I know this is a demanding course, but I'm ready to support you through the challenging parts with empathetic and rigorous guidance.
+
+Here is how I can help you today:
+*   **Check your homework** or assignment work for accuracy and correct IB notation.
+*   **Review your test corrections** or attempts at past paper questions.
+*   **Explain concepts** you might be struggling with (like Complex Numbers, Calculus, or Induction).
+*   **Guide you step-by-step** through solving a difficult problem.
+
+To give you the best possible feedback, **please send me an image of your handwritten work** on a specific problem or topic. Seeing your actual steps on paper helps me pinpoint exactly where you need support.
+
+What are you working on right now?
+[2025-12-18 22:01:21] USER: 
+[2025-12-18 22:01:21] USER: [IMAGE: image_2025-12-18T22-01-21_user.jpg]
+[2025-12-18 22:02:11] ASSISTANT: 
+[2025-12-18 22:04:12] USER: 
+[2025-12-18 22:04:12] USER: [IMAGE: image_2025-12-18T22-04-12_user.jpg]
+[2025-12-18 22:05:05] ASSISTANT: 
