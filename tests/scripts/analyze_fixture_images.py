@@ -128,7 +128,7 @@ Format your response as structured JSON with these keys:
             continue
 
     # If we get here, all models failed
-    raise Exception(f"All models failed. Last error: {last_error}")
+    raise RuntimeError(f"All models failed. Last error: {last_error}")
 
 
 def main():
@@ -191,7 +191,7 @@ def main():
             print(f"  ✓ Saved analysis to {output_file.name}")
             success_count += 1
 
-        except Exception as e:
+        except (RuntimeError, OSError, ValueError, KeyError) as e:
             print(f"  ✗ Error analyzing {image_file.name}: {e}")
             error_count += 1
 
