@@ -15,7 +15,7 @@ This directory contains sample data files used for testing the MBHB system.
 
 ### Generated Worksheets
 
-- `sample_generated_worksheet.html` - Sample worksheet for validation testing
+- Sample worksheets for validation testing can be found in the root `sample-worksheet.html`
 
 ## Usage
 

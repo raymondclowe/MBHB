@@ -74,7 +74,7 @@ jobs:
       run: |
         echo "Testing worksheet generation with OpenRouter API..."
         node index.js
-        if [ -f output/*.html ]; then
+        if find output -name '*.html' -type f | grep -q .; then
           echo "✓ Worksheet generated successfully"
           ls -lh output/
         else
