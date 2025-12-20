@@ -8,12 +8,12 @@ The MBHB system now includes a Python Flask web application with an admin panel 
 
 ```
 MBHB System
-├── Node.js Worksheet Generator (existing)
+├── Node.js Worksheet Generator
 │   ├── index.js - OpenRouter/Gemini integration
 │   ├── cli.js - Interactive CLI
 │   └── examples.js - Pre-configured examples
 │
-└── Python Flask Application (new)
+└── Python Flask Application
     ├── Web Admin Panel
     ├── File Monitoring Service
     ├── Analysis Engine
@@ -336,7 +336,7 @@ python run.py  # Recreates tables
 See also:
 - [SPECIFICATION.md](SPECIFICATION.md) - Complete technical specification
 - [README.md](README.md) - Main project documentation
-- [USAGE.md](USAGE.md) - Original worksheet generator usage
+- [USAGE.md](USAGE.md) - Worksheet generator usage guide
 
 ## Next Steps
 
