@@ -78,9 +78,8 @@ def generate_homework_from_analysis(analysis):
         homework_date = datetime.now().strftime("%Y-%m-%d")
 
     # Generate student ID from image timestamp
-    student_id = (
-        f"IMG_{image_name.split('_')[1]}" if "_" in image_name else "IMG_UNKNOWN"
-    )
+    parts = image_name.split("_")
+    student_id = f"IMG_{parts[1]}" if len(parts) > 1 else "IMG_UNKNOWN"
 
     homework = {
         "student_id": student_id,
