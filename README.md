@@ -1,10 +1,10 @@
-# MBHB - Math Bad Habit Breaker
+# Math Breakthrough Builder (MBHB)
 
-A comprehensive AI-powered system for student performance analysis and adaptive worksheet generation. MBHB automatically monitors student homework, analyzes mistakes, tracks performance patterns, and generates targeted practice worksheets to help students break bad math habits.
+A comprehensive AI-powered system for student performance analysis and adaptive worksheet generation. Math Breakthrough Builder automatically monitors student homework, analyzes areas for improvement, tracks performance patterns, and generates targeted practice worksheets to help students achieve breakthrough improvements in mathematics.
 
 ## 🎯 System Overview
 
-MBHB consists of two integrated components:
+Math Breakthrough Builder (MBHB) consists of two integrated components:
 
 ### 1. **Flask Web Application** (NEW)
 - **Admin Panel**: Web-based interface for managing students and viewing analytics
@@ -25,21 +25,21 @@ MBHB consists of two integrated components:
 ### Performance Analysis System
 - **Automated Homework Monitoring**: Watches folder for new submissions
 - **AI Analysis Integration**: Processes AI-analyzed homework (JSON format)
-- **Mistake Categorization**: 15+ pre-configured IB HL AA Math categories
+- **Pattern Identification**: 15+ pre-configured IB HL AA Math improvement areas
 - **Trend Analysis**: Tracks improving, declining, or stable performance
 - **Priority Scoring**: Calculates worksheet priorities based on frequency × exam weight × recency
 
 ### Student Tracking
 - **Individual Profiles**: Complete performance history per student
-- **Performance Metrics**: Recent vs. historical mistake rates
+- **Performance Metrics**: Recent vs. historical patterns
 - **Progress Monitoring**: Track improvement after targeted practice
 - **Dashboard Views**: Visual analytics and trends
 
 ### Worksheet Generation
 - **AI-Generated Content**: Uses Gemini 2.0 Flash via OpenRouter
-- **Priority-Based**: Automatically targets highest-priority mistake categories
+- **Priority-Based**: Automatically targets highest-priority improvement areas
 - **Progressive Difficulty**: Questions progress from partial to complete solutions
-- **Trick Questions**: Test conceptual understanding
+- **Conceptual Testing**: Includes varied problem types
 - **Dynamic Calculations**: JavaScript with eval() for numerical accuracy
 - **Exam-Optimized**: Prioritized by IB HL AA Mathematics point values
 

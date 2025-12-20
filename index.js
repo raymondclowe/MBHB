@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 /**
- * Main application for generating Math Bad Habit Breaker worksheets
+ * Main application for generating Math Breakthrough Builder worksheets
  * Uses OpenRouter API to access Gemini 2.0 Flash for generating HTML/JavaScript worksheets
  */
 
@@ -17,9 +17,9 @@ const MODEL = 'google/gemini-2.0-flash-exp:free'; // Using Gemini 2.0 Flash (fre
  * Creates the AI prompt for generating the worksheet
  */
 function createPrompt(badHabit, example1, example2, newProblem) {
-  return `You are an expert math education worksheet generator. Create a self-contained HTML file with embedded JavaScript that helps students break bad math habits through progressive practice.
+  return `You are an expert math education worksheet generator. Create a self-contained HTML file with embedded JavaScript that helps students achieve breakthrough improvements in mathematics through targeted practice.
 
-BAD HABIT TO ADDRESS: ${badHabit}
+COMMON CHALLENGE TO ADDRESS: ${badHabit}
 
 EXAMPLE 1: ${example1}
 
@@ -29,13 +29,13 @@ NEW PROBLEM TO WORK ON: ${newProblem}
 
 Generate a complete, self-contained HTML file that:
 
-1. **Explains the bad habit** at the top with clear description and why it's a problem
-2. **Shows 2 worked examples** with the key mistake field BLANKED OUT (use "______") so students must hand-write the correct value
+1. **Explains the common challenge** at the top with clear description and why it's important to master
+2. **Shows 2 worked examples** with the key field BLANKED OUT (use "______") so students must hand-write the correct value
 3. **Generates 10 progressive practice questions** where:
-   - First 3 questions: Only the key mistake field is blank
+   - First 3 questions: Only the key field is blank
    - Next 4 questions: Multiple intermediate steps are blank
    - Last 3 questions: Entire answer is blank (students must fill in complete solution)
-4. **Includes 3 "trick" questions** (interspersed) that are similar but DON'T require the bad habit correction
+4. **Includes 3 "trick" questions** (interspersed) that are similar but have different patterns to test understanding
 5. **Has JavaScript that**:
    - Defines question templates as objects with calculation formulas
    - Uses eval() to compute actual numeric values when page loads
@@ -43,7 +43,7 @@ Generate a complete, self-contained HTML file that:
    - Creates a separate answer sheet (hidden by default, shown with a button)
    - Validates that all calculations are correct
 
-The HTML should be printable and professional-looking with CSS styling.
+The HTML should be printable and professional-looking with CSS styling. Title it "Math Breakthrough Builder".
 
 IMPORTANT REQUIREMENTS:
 - The JavaScript must use eval() or Function constructor for calculations to ensure answers are numerically correct
@@ -53,6 +53,7 @@ IMPORTANT REQUIREMENTS:
 - Make it printer-friendly with proper page breaks
 - Use clear formatting with boxes for student answers
 - Label trick questions subtly (e.g., with an asterisk * and note at bottom)
+- Use positive language: "Common Challenge" instead of "Bad Habit"
 
 Output ONLY the complete HTML code, starting with <!DOCTYPE html> and ending with </html>. Do not include any explanatory text before or after the HTML.`;
 }
@@ -80,7 +81,7 @@ async function generateWorksheet(badHabit, example1, example2, newProblem, apiKe
           'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
           'HTTP-Referer': 'https://github.com/raymondclowe/MBHB',
-          'X-Title': 'Math Bad Habit Breaker'
+          'X-Title': 'Math Breakthrough Builder'
         }
       }
     );

@@ -1,7 +1,7 @@
 {
   "name": "mbhb",
   "version": "1.0.0",
-  "description": "Math Bad Habit Breaker - worksheet generator that makes worksheets specifically to break out of bad math habits",
+  "description": "Math Breakthrough Builder - AI-powered worksheet generator that creates targeted practice worksheets to help students achieve breakthrough improvements in mathematics",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -11,7 +11,7 @@
   "bin": {
     "mbhb": "./cli.js"
   },
-  "keywords": ["math", "worksheet", "education", "bad-habits"],
+  "keywords": ["math", "worksheet", "education", "improvement", "learning"],
   "author": "",
   "license": "ISC",
   "dependencies": {

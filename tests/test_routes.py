@@ -19,7 +19,7 @@ class TestMainRoutes:
         """Test about page"""
         response = client.get('/about')
         assert response.status_code == 200
-        assert b'About MBHB' in response.data
+        assert b'Math Breakthrough Builder' in response.data
 
 
 class TestStudentRoutes:

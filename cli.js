@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Interactive CLI for generating Math Bad Habit Breaker worksheets
+ * Interactive CLI for generating Math Breakthrough Builder worksheets
  */
 
 const readline = require('readline');
@@ -21,7 +21,7 @@ function question(prompt) {
 }
 
 async function main() {
-  console.log('=== Math Bad Habit Breaker - Worksheet Generator ===\n');
+  console.log('=== Math Breakthrough Builder - Worksheet Generator ===\n');
   
   // Check for API key
   const apiKey = process.env.OPENROUTER_API_KEY;
