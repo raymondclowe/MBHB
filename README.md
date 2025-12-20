@@ -2,22 +2,34 @@
 
 **Maximize Your IB Exam Score Through Targeted, Personalized Practice**
 
-A comprehensive AI-powered system for student performance analysis and adaptive worksheet generation. Math Breakthrough Builder automatically monitors student homework, analyzes areas for improvement, tracks performance patterns, and generates targeted practice worksheets to help students **achieve breakthrough improvements in mathematics and maximize their IB exam scores**.
+## 🎯 Goals
 
-Specifically designed for **IB HL AA Mathematics**, the system prioritizes practice based on exam point values, ensuring you focus on the skills that will have the greatest impact on your final score while building real mathematical understanding you'll use at university.
+Math Breakthrough Builder helps students achieve breakthrough improvements in mathematics through:
 
-## 🎯 System Overview
+1. **Automated Performance Analysis**: Monitors student homework and identifies patterns in mistakes
+2. **Targeted Practice Generation**: Creates personalized worksheets focused on each student's specific weaknesses
+3. **IB Exam Optimization**: Prioritizes practice based on IB HL AA Mathematics exam point values
+4. **Progress Tracking**: Tracks improvement over time to ensure interventions are effective
+5. **University Preparation**: Builds real mathematical understanding for higher education success
+
+The system automatically analyzes submitted homework, calculates priority scores for different mistake categories, and generates AI-powered practice worksheets to address the most impactful areas for improvement.
+
+## 📋 System Overview
+
+A comprehensive AI-powered system for student performance analysis and adaptive worksheet generation. Math Breakthrough Builder automatically monitors student homework, analyzes areas for improvement, tracks performance patterns, and generates targeted practice worksheets.
+
+Specifically designed for **IB HL AA Mathematics**, the system prioritizes practice based on exam point values, ensuring you focus on the skills that will have the greatest impact on your final score.
 
 Math Breakthrough Builder (MBHB) consists of two integrated components:
 
-### 1. **Flask Web Application** (NEW)
+### 1. **Flask Web Application**
 - **Admin Panel**: Web-based interface for managing students and viewing analytics
 - **File Monitoring**: Automatically processes submitted homework
 - **Analysis Engine**: Categorizes mistakes and tracks performance
 - **Performance Metrics**: Calculates trends, priorities, and improvement rates
 - **Automated Worksheet Generation**: Creates targeted practice based on student needs
 
-### 2. **Worksheet Generator** (Original)
+### 2. **Worksheet Generator**
 - AI-powered HTML/JavaScript worksheet creation
 - Progressive difficulty with strategic blanks
 - Dynamic calculations with eval()
@@ -50,15 +62,24 @@ Math Breakthrough Builder (MBHB) consists of two integrated components:
 - **Score Maximization**: Focused, targeted, personalized practice to achieve the best possible exam results
 - **University Preparation**: Build real mathematical understanding you'll use in higher education
 
-## 🚀 Quick Start
+## 🚀 Installation
 
-### Option 1: Full System (Flask + Worksheet Generator)
+### Prerequisites
 
-1. **Clone and Install**:
+- **Python 3.9+**: For the Flask web application and analysis engine
+- **Node.js 16+**: For the worksheet generator
+- **OpenRouter API Key**: Get free API key from [OpenRouter](https://openrouter.ai/keys)
+
+### Quick Installation
+
+1. **Clone the repository**:
 ```bash
 git clone https://github.com/raymondclowe/MBHB.git
 cd MBHB
+```
 
+2. **Install dependencies**:
+```bash
 # Install Node.js dependencies
 npm install
 
@@ -66,32 +87,36 @@ npm install
 pip install -r requirements.txt
 ```
 
-2. **Configure**:
+3. **Configure API key**:
 ```bash
 export OPENROUTER_API_KEY="your-api-key-here"
 ```
-Get your API key from [OpenRouter](https://openrouter.ai/keys)
 
-3. **Run**:
+### Running the System
+
+**Option 1: Full System (Recommended)**
+
+Run both the web application and file monitor for complete functionality:
+
 ```bash
-# Terminal 1: Start Flask web app
+# Terminal 1: Start Flask web application
 python run.py
 
 # Terminal 2: Start file monitor
 python monitor.py
 ```
 
-4. **Access**: Open http://localhost:8050 (or http://fridge:8050 on Raspberry Pi)
+Then access the admin panel at: **http://localhost:8050** (or **http://your-hostname:8050** for network access)
 
-### Option 2: Worksheet Generator Only (Original)
+**Option 2: Worksheet Generator Only**
+
+For standalone worksheet generation without student tracking:
 
 ```bash
-npm install
-export OPENROUTER_API_KEY="your-key"
 npm run cli  # Interactive mode
 ```
 
-See [FLASK_SETUP.md](FLASK_SETUP.md) for detailed Flask setup instructions
+See [FLASK_SETUP.md](FLASK_SETUP.md) for detailed setup and [RASPBERRY_PI_DEPLOYMENT.md](RASPBERRY_PI_DEPLOYMENT.md) for Raspberry Pi deployment.
 
 ## Usage
 
@@ -166,12 +191,6 @@ Each worksheet includes:
   - Questions 8-10: Complete solutions required
 - **Trick Questions** (3 total): Interspersed questions that don't require the correction
 - **Answer Sheet**: Hidden by default, accessible via button
-
-## Requirements
-
-- Node.js 12 or higher
-- OpenRouter API key
-- Internet connection for API calls
 
 ## Security Note
 
