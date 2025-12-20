@@ -1,0 +1,54 @@
+[2025-12-20 15:30:55] USER: 
+
+Here is the question and the handwritten answer by the student. Mark it likee a teacher would, according to the IB Maths marking scheme. Give explanation if the answer is incorrect or incomplete. Give ticks to working that may help to get marks in the exam.
+[2025-12-20 15:30:55] USER: [User Image 1 of 2]
+[2025-12-20 15:30:55] USER: [IMAGE: image_2025-12-20T15-30-55_user.jpg]
+[2025-12-20 15:30:55] USER: [User Image 2 of 2]
+[2025-12-20 15:30:55] USER: [IMAGE: image_2025-12-20T15-30-55_user.jpg]
+[2025-12-20 15:31:48] ASSISTANT: Hello! I'd be happy to check your work on this star parallax problem. This is a classic application of trigonometry in astronomy.
+
+Here is your work with my feedback. You've done an excellent job!
+
+**Part (a)**
+
+**Part (b)**
+
+
+### Feedback Summary
+
+The annotated image shows your work is **excellent**. Your method is sound and you have performed the calculations correctly.
+
+*   **Things that were wrong**
+    *   None! Your work is free of errors.
+
+*   **Watch points**
+    *   In part (b), you used $9.46 \times 10^{15}$ m for a light-year, but the question gave $9.46\underline{\textbf{1}} \times 10^{15}$ m. It didn't affect your final answer when rounded to 3 significant figures, but it's good practice to use the exact values given to avoid rounding errors.
+
+*   **What's right**
+    *   Your diagrams are clear and correctly labelled.
+    *   You correctly converted between arc seconds and degrees, and between meters and light-years.
+    *   Your use of trigonometry (the tangent function) was perfect for this problem.
+    *   Both final answers are correct.
+
+### Estimated Marks
+
+This whole question would be worth approximately **7-8 marks** in an IB HL AA exam.
+
+*   Part (a): ~4 marks
+*   Part (b): ~3-4 marks
+
+Your solution is complete and correct, so you would receive **full marks (7-8/7-8)**.
+
+Well done! Keep up the good work.
+[2025-12-20 15:47:35] USER: 
+
+Here is the question, working solution and the handwritten answer by the student. Mark it like a teacher according to the work solution image. Give explanation if the answer is incorrect or incomplete. Give ticks to working that may help to get marks in the exam. Output the student's answer again with the teacher's marking as an image
+[2025-12-20 15:47:35] USER: [User Image 1 of 3]
+[2025-12-20 15:47:35] USER: [IMAGE: image_2025-12-20T15-47-35_user.jpg]
+[2025-12-20 15:47:35] USER: [User Image 2 of 3]
+[2025-12-20 15:47:35] USER: [IMAGE: image_2025-12-20T15-47-35_user.jpg]
+[2025-12-20 15:47:35] USER: [User Image 3 of 3]
+[2025-12-20 15:47:35] USER: [IMAGE: image_2025-12-20T15-47-35_user.jpg]
+[2025-12-20 15:48:29] ASSISTANT: 
+[2025-12-20 15:48:29] ASSISTANT: [Image]
+[2025-12-20 15:48:29] ASSISTANT: [IMAGE: image_2025-12-20T15-48-29_assistant.png]
