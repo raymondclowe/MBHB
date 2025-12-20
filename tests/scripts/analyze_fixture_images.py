@@ -118,7 +118,11 @@ Format your response as structured JSON with these keys:
             last_error = f"HTTP error with {model}: {e}"
             print(f"    ⚠ {last_error}")
             continue
-        except Exception as e:
+        except (
+            requests.exceptions.RequestException,
+            json.JSONDecodeError,
+            KeyError,
+        ) as e:
             last_error = f"Error with {model}: {e}"
             print(f"    ⚠ {last_error}")
             continue

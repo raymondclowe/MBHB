@@ -58,7 +58,7 @@ def load_analysis_files():
                             "data": {"raw_content": content},
                         }
                     )
-        except Exception as e:
+        except (json.JSONDecodeError, FileNotFoundError, UnicodeDecodeError) as e:
             print(f"  ✗ Error loading {analysis_file.name}: {e}")
 
     return analyses
@@ -179,7 +179,7 @@ def main():
             print(f"  ✓ Generated: {output_file.name}")
             generated_count += 1
 
-        except Exception as e:
+        except (OSError, json.JSONDecodeError) as e:
             print(f"  ✗ Error generating from {analysis.get('file', 'unknown')}: {e}")
 
     print()
