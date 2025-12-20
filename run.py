@@ -16,7 +16,8 @@ if __name__ == '__main__':
         print("Database tables created/verified")
     
     # Run the Flask development server
-    port = int(os.environ.get('PORT', 5000))
+    # Default to port 8050 to avoid conflicts on Raspberry Pi
+    port = int(os.environ.get('PORT', 8050))
     debug = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
     
     print(f"\n{'='*60}")

@@ -81,7 +81,7 @@ python run.py
 python monitor.py
 ```
 
-4. **Access**: Open http://localhost:5000
+4. **Access**: Open http://localhost:8050 (or http://fridge:8050 on Raspberry Pi)
 
 ### Option 2: Worksheet Generator Only (Original)
 

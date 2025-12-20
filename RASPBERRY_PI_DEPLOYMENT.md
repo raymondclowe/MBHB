@@ -2,13 +2,27 @@
 
 ## Overview
 
-This guide provides instructions for deploying the MBHB (Math Bad Habit Breaker) system on a Raspberry Pi that is already running the AITGChatBot homework data collection system.
+This guide provides instructions for deploying the MBHB (Math Breakthrough Builder) system on a Raspberry Pi named **"fridge"** that is already running the AITGChatBot homework data collection system.
+
+## Machine-Specific Configuration
+
+**Important**: This deployment is configured for your specific Raspberry Pi setup:
+- **Machine Name**: `fridge` (hostname)
+- **Port**: `8050` (chosen to avoid conflicts with existing services)
+- **Data Source**: `/opt/AITGChatBot/data/5289364296`
+- **Access URLs**: 
+  - Local: `http://localhost:8050`
+  - Network: `http://fridge:8050` or `http://fridge.local:8050`
+
+**Why Port 8050?** Port 5000 and other common ports are likely already in use by other services on fridge. Port 8050 provides a conflict-free alternative while being easy to remember.
 
 ## System Integration
 
-The MBHB system integrates with existing homework data collection at:
+The MBHB system integrates with existing homework data collection on **fridge** at:
+- **Machine Name**: fridge
 - **Data Location**: `/opt/AITGChatBot/data/5289364296`
 - **Data Format**: Chat text files + user images (homework) + assistant images (marked corrections)
+- **MBHB Port**: 8050 (avoids conflicts with other services)
 
 ### Current Data Structure
 
@@ -100,8 +114,8 @@ HOMEWORK_FOLDER=/opt/MBHB/homework_submissions
 # Worksheet output
 WORKSHEET_FOLDER=/opt/MBHB/generated_worksheets
 
-# Port configuration
-PORT=5000
+# Port configuration (using 8050 to avoid conflicts)
+PORT=8050
 ```
 
 **Generate a secure secret key:**
@@ -222,10 +236,10 @@ Add:
 ```nginx
 server {
     listen 80;
-    server_name your-pi-hostname.local;
+    server_name fridge.local fridge;
 
-    location / {
-        proxy_pass http://localhost:5000;
+    location /mbhb {
+        proxy_pass http://localhost:8050;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -233,6 +247,8 @@ server {
     }
 }
 ```
+
+**Note**: This configuration makes MBHB available at `http://fridge/mbhb` to avoid conflicts with other services.
 
 Enable and restart:
 
@@ -413,12 +429,21 @@ Add:
 ### 1. Test Web Interface
 
 ```bash
+# From the Raspberry Pi (fridge):
+curl http://localhost:8050
+
 # From any computer on the network:
-curl http://raspberry-pi-ip:5000
+curl http://fridge:8050
+# or
+curl http://fridge.local:8050
 
 # Or open in browser:
-http://raspberry-pi-ip:5000
+http://fridge:8050
+# or
+http://fridge.local:8050
 ```
+
+**Note**: Port 8050 is used to avoid conflicts with other services on fridge.
 
 ### 2. Test File Monitoring
 
@@ -556,7 +581,18 @@ free -h
 
 # Reduce Flask workers (edit mbhb-web.service)
 # Add: Environment="FLASK_RUN_HOST=0.0.0.0"
-# Add: Environment="FLASK_RUN_PORT=5000"
+# Add: Environment="FLASK_RUN_PORT=8050"
+```
+
+### Out of Memory
+
+```bash
+# Check memory usage
+free -h
+
+# Reduce Flask workers (edit mbhb-web.service)
+# Add: Environment="FLASK_RUN_HOST=0.0.0.0"
+# Add: Environment="FLASK_RUN_PORT=8050"
 ```
 
 ## Accessing the System
@@ -564,12 +600,16 @@ free -h
 ### From Local Network
 
 ```
-http://raspberry-pi-hostname.local:5000
+http://fridge:8050
+# or
+http://fridge.local:8050
+# or with IP address
+http://192.168.x.x:8050
 ```
 
 ### From Internet (with port forwarding)
 
-1. Configure port forwarding on router (external 8080 → internal 5000)
+1. Configure port forwarding on router (external 8080 → internal 8050)
 2. Use dynamic DNS (DuckDNS, No-IP)
 3. **Important**: Add authentication before exposing to internet!
 
@@ -580,7 +620,7 @@ http://raspberry-pi-hostname.local:5000
    ```bash
    sudo apt-get install ufw
    sudo ufw allow 22
-   sudo ufw allow 5000
+   sudo ufw allow 8050
    sudo ufw enable
    ```
 3. **Regular updates**:
@@ -599,9 +639,37 @@ For issues specific to:
 
 ## Next Steps
 
-1. Review data in admin panel: http://pi-ip:5000
-2. Add students via web interface
-3. Monitor automatic homework processing
-4. Review and manually categorize initial mistakes
-5. Generate first worksheets
+1. **Review data in admin panel**: http://fridge:8050 or http://fridge.local:8050
+2. **Add students** via web interface
+3. **Monitor automatic homework processing** (check logs: `sudo journalctl -u mbhb-monitor -f`)
+4. **Review and manually categorize** initial mistakes
+5. **Generate first worksheets** based on student performance
+
+## Quick Reference
+
+**Access URLs**:
+- From fridge: http://localhost:8050
+- From local network: http://fridge:8050 or http://fridge.local:8050
+- With Nginx: http://fridge/mbhb
+
+**Service Management**:
+```bash
+# Check status
+sudo systemctl status mbhb-web
+sudo systemctl status mbhb-monitor
+
+# Restart
+sudo systemctl restart mbhb-web mbhb-monitor
+
+# View logs
+sudo journalctl -u mbhb-web -f
+sudo journalctl -u mbhb-monitor -f
+```
+
+**Important Files**:
+- Configuration: `/opt/MBHB/.env`
+- Database: `/opt/MBHB/mbhb.db`
+- Homework data: `/opt/AITGChatBot/data/5289364296/`
+- Generated worksheets: `/opt/MBHB/generated_worksheets/`
+- Logs: `/var/log/mbhb_processor.log`
 6. Track student progress
