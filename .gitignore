@@ -16,3 +16,12 @@ homework_submissions/*.pdf
 generated_worksheets/*.html
 !generated_worksheets/README.md
 !homework_submissions/README.md
+# Keep test fixtures
+!tests/fixtures/*.json
+!tests/fixtures/*.html
+# CI artifacts
+htmlcov/
+.coverage
+*.cover
+.hypothesis/
+.tox/

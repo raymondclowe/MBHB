@@ -1,0 +1,59 @@
+{
+  "student_id": "TEST003",
+  "student_name": "Algebra Focus Student",
+  "homework_date": "2024-01-18",
+  "questions": [
+    {
+      "question_number": 1,
+      "topic": "Algebra - Factoring",
+      "student_answer": "x² + 5x + 6 = (x + 2)(x + 4)",
+      "correct_answer": "x² + 5x + 6 = (x + 2)(x + 3)",
+      "mistakes": [
+        {
+          "type": "incorrect_factoring",
+          "description": "Incorrect factors - did not verify by expanding",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "question_number": 2,
+      "topic": "Algebra - Simplifying",
+      "student_answer": "(x + 5)/(x + 3) = 5/3",
+      "correct_answer": "Cannot simplify - no common factors",
+      "mistakes": [
+        {
+          "type": "incorrect_cancellation",
+          "description": "Incorrectly canceled terms across addition",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "question_number": 3,
+      "topic": "Algebra - Expanding",
+      "student_answer": "(x + 3)² = x² + 9",
+      "correct_answer": "(x + 3)² = x² + 6x + 9",
+      "mistakes": [
+        {
+          "type": "missing_middle_term",
+          "description": "Forgot middle term 2ab when squaring binomial",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "question_number": 4,
+      "topic": "Algebra - Equation Solving",
+      "student_answer": "3x + 2 = 11, x = 11 - 2 = 9",
+      "correct_answer": "3x + 2 = 11, 3x = 9, x = 3",
+      "mistakes": [
+        {
+          "type": "forgot_to_divide",
+          "description": "Forgot to divide by coefficient after subtracting",
+          "severity": "high"
+        }
+      ]
+    }
+  ]
+}

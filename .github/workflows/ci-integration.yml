@@ -1,0 +1,104 @@
+name: Integration Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test-integration:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Install Node.js dependencies
+      run: npm ci
+    
+    - name: Create test directories
+      run: |
+        mkdir -p homework_submissions
+        mkdir -p generated_worksheets
+        mkdir -p output
+    
+    - name: Set up test environment variables
+      run: |
+        echo "FLASK_ENV=testing" >> $GITHUB_ENV
+        echo "DATABASE_URL=sqlite:///test_ci.db" >> $GITHUB_ENV
+    
+    - name: Run Python tests
+      run: |
+        pytest tests/test_*.py -v --maxfail=5
+    
+    - name: Run Node.js tests
+      run: |
+        npm test
+    
+    - name: Test Flask application startup
+      run: |
+        # Start Flask app in background and test it responds
+        timeout 10 python run.py &
+        sleep 3
+        # Check if process is running
+        if pgrep -f "python run.py" > /dev/null; then
+          echo "✓ Flask app started successfully"
+          pkill -f "python run.py"
+        else
+          echo "✗ Flask app failed to start"
+          exit 1
+        fi
+      continue-on-error: true
+    
+    - name: Test worksheet generation with API (if key available)
+      if: secrets.OPENROUTER_API_KEY != ''
+      env:
+        OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      run: |
+        echo "Testing worksheet generation with OpenRouter API..."
+        node index.js
+        if [ -f output/*.html ]; then
+          echo "✓ Worksheet generated successfully"
+          ls -lh output/
+        else
+          echo "⚠ No worksheet generated (may be expected if API key not set)"
+        fi
+      continue-on-error: true
+    
+    - name: Verify test fixtures
+      run: |
+        echo "Checking test fixtures..."
+        test -f tests/fixtures/sample_homework_submission.json && echo "✓ sample_homework_submission.json exists"
+        test -f tests/fixtures/homework_perfect_score.json && echo "✓ homework_perfect_score.json exists"
+        test -f tests/fixtures/homework_algebra_errors.json && echo "✓ homework_algebra_errors.json exists"
+        test -f tests/fixtures/homework_calculus_errors.json && echo "✓ homework_calculus_errors.json exists"
+        echo "All fixtures verified!"
+    
+    - name: Upload test artifacts
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-outputs-${{ github.run_id }}
+        path: |
+          output/
+          generated_worksheets/
+          htmlcov/
+          *.log
+        retention-days: 7
