@@ -1,7 +1,7 @@
 {
   "name": "mbhb",
   "version": "1.0.0",
-  "description": "Math Breakthrough Builder - AI-powered worksheet generator that creates targeted practice worksheets to help students achieve breakthrough improvements in mathematics",
+  "description": "Math Breakthrough Builder - AI-powered worksheet generator that creates targeted, focused, personalized practice to maximize IB exam scores while building real mathematical understanding for university",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

@@ -1,6 +1,10 @@
 # Math Breakthrough Builder (MBHB)
 
-A comprehensive AI-powered system for student performance analysis and adaptive worksheet generation. Math Breakthrough Builder automatically monitors student homework, analyzes areas for improvement, tracks performance patterns, and generates targeted practice worksheets to help students achieve breakthrough improvements in mathematics.
+**Maximize Your IB Exam Score Through Targeted, Personalized Practice**
+
+A comprehensive AI-powered system for student performance analysis and adaptive worksheet generation. Math Breakthrough Builder automatically monitors student homework, analyzes areas for improvement, tracks performance patterns, and generates targeted practice worksheets to help students **achieve breakthrough improvements in mathematics and maximize their IB exam scores**.
+
+Specifically designed for **IB HL AA Mathematics**, the system prioritizes practice based on exam point values, ensuring you focus on the skills that will have the greatest impact on your final score while building real mathematical understanding you'll use at university.
 
 ## 🎯 System Overview
 
@@ -28,6 +32,7 @@ Math Breakthrough Builder (MBHB) consists of two integrated components:
 - **Pattern Identification**: 15+ pre-configured IB HL AA Math improvement areas
 - **Trend Analysis**: Tracks improving, declining, or stable performance
 - **Priority Scoring**: Calculates worksheet priorities based on frequency × exam weight × recency
+- **IB Exam Score Optimization**: Prioritizes practice that maximizes potential point gains on final exams
 
 ### Student Tracking
 - **Individual Profiles**: Complete performance history per student
@@ -42,6 +47,8 @@ Math Breakthrough Builder (MBHB) consists of two integrated components:
 - **Conceptual Testing**: Includes varied problem types
 - **Dynamic Calculations**: JavaScript with eval() for numerical accuracy
 - **Exam-Optimized**: Prioritized by IB HL AA Mathematics point values
+- **Score Maximization**: Focused, targeted, personalized practice to achieve the best possible exam results
+- **University Preparation**: Build real mathematical understanding you'll use in higher education
 
 ## 🚀 Quick Start
 

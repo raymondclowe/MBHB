@@ -17,7 +17,7 @@ const MODEL = 'google/gemini-2.0-flash-exp:free'; // Using Gemini 2.0 Flash (fre
  * Creates the AI prompt for generating the worksheet
  */
 function createPrompt(badHabit, example1, example2, newProblem) {
-  return `You are an expert math education worksheet generator. Create a self-contained HTML file with embedded JavaScript that helps students achieve breakthrough improvements in mathematics through targeted practice.
+  return `You are an expert math education worksheet generator specializing in IB HL AA Mathematics. Create a self-contained HTML file with embedded JavaScript that helps students MAXIMIZE THEIR IB EXAM SCORES through targeted, focused, personalized practice while building real mathematical understanding they'll use at university.
 
 COMMON CHALLENGE TO ADDRESS: ${badHabit}
 
@@ -26,6 +26,8 @@ EXAMPLE 1: ${example1}
 EXAMPLE 2: ${example2}
 
 NEW PROBLEM TO WORK ON: ${newProblem}
+
+This worksheet is designed to optimize exam performance. Students should understand both HOW to solve problems AND WHY the concepts matter for university-level mathematics.
 
 Generate a complete, self-contained HTML file that:
 

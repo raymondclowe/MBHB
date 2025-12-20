@@ -21,7 +21,11 @@ function question(prompt) {
 }
 
 async function main() {
-  console.log('=== Math Breakthrough Builder - Worksheet Generator ===\n');
+  console.log('╔═══════════════════════════════════════════════════════════════╗');
+  console.log('║         Math Breakthrough Builder - Worksheet Generator       ║');
+  console.log('║     Maximize Your IB Exam Score with Targeted Practice       ║');
+  console.log('╚═══════════════════════════════════════════════════════════════╝');
+  console.log();
   
   // Check for API key
   const apiKey = process.env.OPENROUTER_API_KEY;
