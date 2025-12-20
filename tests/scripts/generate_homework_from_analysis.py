@@ -74,7 +74,7 @@ def generate_homework_from_analysis(analysis):
     try:
         date_part = image_name.split("_")[1].split("T")[0]
         homework_date = date_part
-    except:
+    except (IndexError, ValueError):
         homework_date = datetime.now().strftime("%Y-%m-%d")
 
     # Generate student ID from image timestamp
