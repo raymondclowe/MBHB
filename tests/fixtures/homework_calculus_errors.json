@@ -1,0 +1,72 @@
+{
+  "student_id": "TEST004",
+  "student_name": "Calculus Focus Student",
+  "homework_date": "2024-01-22",
+  "questions": [
+    {
+      "question_number": 1,
+      "topic": "Calculus - Differentiation",
+      "student_answer": "d/dx(x³) = 3x",
+      "correct_answer": "d/dx(x³) = 3x²",
+      "mistakes": [
+        {
+          "type": "power_rule_error",
+          "description": "Forgot to subtract 1 from exponent in power rule",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "question_number": 2,
+      "topic": "Calculus - Chain Rule",
+      "student_answer": "d/dx(sin(2x)) = cos(2x)",
+      "correct_answer": "d/dx(sin(2x)) = 2cos(2x)",
+      "mistakes": [
+        {
+          "type": "missing_chain_rule_factor",
+          "description": "Forgot to multiply by inner derivative (2)",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "question_number": 3,
+      "topic": "Calculus - Integration",
+      "student_answer": "∫x² dx = x³/2",
+      "correct_answer": "∫x² dx = x³/3 + C",
+      "mistakes": [
+        {
+          "type": "incorrect_power_rule_integration",
+          "description": "Wrong denominator and missing constant",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "question_number": 4,
+      "topic": "Calculus - Limits",
+      "student_answer": "lim(x→0) sin(x)/x = 0",
+      "correct_answer": "lim(x→0) sin(x)/x = 1",
+      "mistakes": [
+        {
+          "type": "standard_limit_error",
+          "description": "Did not recognize standard limit formula",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "question_number": 5,
+      "topic": "Calculus - Product Rule",
+      "student_answer": "d/dx(x·sin(x)) = sin(x)",
+      "correct_answer": "d/dx(x·sin(x)) = sin(x) + x·cos(x)",
+      "mistakes": [
+        {
+          "type": "forgot_product_rule",
+          "description": "Only differentiated one factor instead of using product rule",
+          "severity": "high"
+        }
+      ]
+    }
+  ]
+}
