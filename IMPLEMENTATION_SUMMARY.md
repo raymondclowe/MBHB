@@ -52,7 +52,7 @@ Created three workflows in `.github/workflows/`:
 #### ci-integration.yml
 - End-to-end integration tests
 - Tests both Python and Node.js components together
-- Optional API testing (when OPENROUTER_API_KEY available)
+- Optional API testing (when COPILOT_OPENROUTER_API_KEY available)
 - Artifact preservation for debugging
 - Security: Proper GITHUB_TOKEN permissions
 
@@ -83,7 +83,7 @@ Created 13 new end-to-end tests:
 
 ### 4. Required Secrets
 
-#### OPENROUTER_API_KEY (Required)
+#### COPILOT_OPENROUTER_API_KEY (Required)
 **Purpose**: AI-powered worksheet generation
 
 **How to obtain**:
@@ -94,11 +94,13 @@ Created 13 new end-to-end tests:
 **How to add to GitHub**:
 1. Repository → Settings → Secrets and variables → Actions
 2. New repository secret
-3. Name: `OPENROUTER_API_KEY`
+3. Name: `COPILOT_OPENROUTER_API_KEY`
 4. Value: Your API key
 5. Add secret
 
-**Usage**: Available as `${{ secrets.OPENROUTER_API_KEY }}` in workflows
+**Usage**: Available as `${{ secrets.COPILOT_OPENROUTER_API_KEY }}` in workflows
+
+**Note**: The `COPILOT_` prefix is required for GitHub Actions, workflows, and Copilot sessions to properly access the secret.
 
 ### 5. Folder Structure
 
@@ -149,14 +151,15 @@ All tests passing:
 ### 8. How to Use
 
 #### Quick Start
-1. Add `OPENROUTER_API_KEY` to GitHub Secrets
+1. Add `COPILOT_OPENROUTER_API_KEY` to GitHub Secrets
 2. Push code to trigger workflows
 3. Check Actions tab for results
 
 #### Local Testing
 ```bash
-# Set API key
-export OPENROUTER_API_KEY="your-key-here"
+# Set API key (with COPILOT_ prefix)
+export COPILOT_OPENROUTER_API_KEY="your-key-here"
+export OPENROUTER_API_KEY="$COPILOT_OPENROUTER_API_KEY"
 
 # Python tests
 pytest tests/ -v
@@ -236,7 +239,7 @@ For the repository owner:
 
 1. **Add API Key** (5 minutes):
    - Go to GitHub Settings → Secrets
-   - Add `OPENROUTER_API_KEY`
+   - Add `COPILOT_OPENROUTER_API_KEY`
    - Follow guide in CI_TESTING.md
 
 2. **Enable Workflows** (automatic):

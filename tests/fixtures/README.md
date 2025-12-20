@@ -2,6 +2,12 @@
 
 This directory contains sample data files used for testing the MBHB system.
 
+## Files Location
+
+**All sample files needed for CI testing are already in this directory (`tests/fixtures/`).**
+
+You don't need to copy any files - they're already committed to the repository.
+
 ## Files
 
 ### Homework Submissions

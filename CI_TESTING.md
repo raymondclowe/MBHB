@@ -19,11 +19,13 @@ This guide explains how to set up end-to-end continuous integration testing in G
 1. Go to your repository on GitHub
 2. Navigate to **Settings** → **Secrets and variables** → **Actions**
 3. Click **New repository secret**
-4. Name: `OPENROUTER_API_KEY`
+4. Name: `COPILOT_OPENROUTER_API_KEY`
 5. Value: Paste your OpenRouter API key
 6. Click **Add secret**
 
-**Usage in CI**: This will be available as `${{ secrets.OPENROUTER_API_KEY }}` in GitHub Actions workflows
+**Usage in CI**: This will be available as `${{ secrets.COPILOT_OPENROUTER_API_KEY }}` in GitHub Actions workflows
+
+**Note**: The `COPILOT_` prefix is required for GitHub Actions, workflows, and Copilot sessions to properly access the secret.
 
 ### 2. Flask Secret Key (OPTIONAL - Auto-generated for CI)
 
@@ -259,9 +261,9 @@ jobs:
     
     - name: Set up test environment variables
       env:
-        OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        COPILOT_OPENROUTER_API_KEY: ${{ secrets.COPILOT_OPENROUTER_API_KEY }}
       run: |
-        echo "OPENROUTER_API_KEY=${OPENROUTER_API_KEY}" >> $GITHUB_ENV
+        echo "OPENROUTER_API_KEY=${COPILOT_OPENROUTER_API_KEY}" >> $GITHUB_ENV
         echo "FLASK_ENV=testing" >> $GITHUB_ENV
         echo "DATABASE_URL=sqlite:///test.db" >> $GITHUB_ENV
     
@@ -306,12 +308,12 @@ jobs:
 3. **Add OpenRouter API Key**
    - Click **New repository secret** button
    - Enter the following:
-     - **Name**: `OPENROUTER_API_KEY`
+     - **Name**: `COPILOT_OPENROUTER_API_KEY`
      - **Secret**: Your actual API key from OpenRouter
    - Click **Add secret**
 
 4. **Verify Secret is Added**
-   - You should see `OPENROUTER_API_KEY` in the list of repository secrets
+   - You should see `COPILOT_OPENROUTER_API_KEY` in the list of repository secrets
    - The actual value will be hidden (shown as `***`)
 
 5. **Test the Secret** (Optional but Recommended)
@@ -320,11 +322,11 @@ jobs:
      ```yaml
      - name: Test secret availability
        run: |
-         if [ -z "${{ secrets.OPENROUTER_API_KEY }}" ]; then
-           echo "❌ OPENROUTER_API_KEY is not set"
+         if [ -z "${{ secrets.COPILOT_OPENROUTER_API_KEY }}" ]; then
+           echo "❌ COPILOT_OPENROUTER_API_KEY is not set"
            exit 1
          else
-           echo "✅ OPENROUTER_API_KEY is available"
+           echo "✅ COPILOT_OPENROUTER_API_KEY is available"
          fi
      ```
 
@@ -387,7 +389,8 @@ Create these files in `tests/fixtures/`:
 
 1. **Set up local environment**
    ```bash
-   export OPENROUTER_API_KEY="your-key-here"
+   export COPILOT_OPENROUTER_API_KEY="your-key-here"
+   export OPENROUTER_API_KEY="$COPILOT_OPENROUTER_API_KEY"
    export FLASK_ENV=testing
    ```
 
@@ -433,10 +436,10 @@ brew install act  # macOS
 # or download from: https://github.com/nektos/act/releases
 
 # Create secrets file
-echo "OPENROUTER_API_KEY=your-key-here" > .secrets
+echo "COPILOT_OPENROUTER_API_KEY=your-key-here" > .secrets
 
 # Run workflows locally
-act -s OPENROUTER_API_KEY="$(cat .secrets)"
+act -s COPILOT_OPENROUTER_API_KEY="$(cat .secrets)"
 ```
 
 ## Continuous Integration Best Practices
@@ -505,11 +508,11 @@ E2E Tests         → Slower, tests full user workflows
 
 ## Troubleshooting Common CI Issues
 
-### Issue: "OPENROUTER_API_KEY not set"
+### Issue: "COPILOT_OPENROUTER_API_KEY not set"
 
 **Solution**:
 1. Verify secret is added in GitHub Settings
-2. Check secret name matches exactly: `OPENROUTER_API_KEY`
+2. Check secret name matches exactly: `COPILOT_OPENROUTER_API_KEY`
 3. Ensure workflow has access to secrets (not on fork PRs from external contributors)
 
 ### Issue: "Module not found" errors
@@ -569,14 +572,16 @@ For production deployments with additional protection:
 
 ```yaml
 - name: Test with API (if key available)
-  if: secrets.OPENROUTER_API_KEY != ''
+  if: secrets.COPILOT_OPENROUTER_API_KEY != ''
+  env:
+    OPENROUTER_API_KEY: ${{ secrets.COPILOT_OPENROUTER_API_KEY }}
   run: |
     node index.js
 
 - name: Skip API tests (if no key)
-  if: secrets.OPENROUTER_API_KEY == ''
+  if: secrets.COPILOT_OPENROUTER_API_KEY == ''
   run: |
-    echo "⚠️  Skipping API tests - OPENROUTER_API_KEY not available"
+    echo "⚠️  Skipping API tests - COPILOT_OPENROUTER_API_KEY not available"
     echo "Tests run in offline mode"
 ```
 

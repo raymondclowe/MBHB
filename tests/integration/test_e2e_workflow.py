@@ -153,12 +153,14 @@ class TestEndToEndWorkflow:
 
     def test_api_key_environment_variable(self):
         """Test that OPENROUTER_API_KEY can be accessed from environment."""
-        api_key = os.environ.get("OPENROUTER_API_KEY")
+        # Check for COPILOT_ prefix first, then fallback to standard
+        api_key = os.environ.get("OPENROUTER_API_KEY") or os.environ.get("COPILOT_OPENROUTER_API_KEY")
         if api_key:
             assert len(api_key) > 0
             print("✓ OPENROUTER_API_KEY is set")
         else:
             print("⚠ OPENROUTER_API_KEY not set (some tests may be skipped)")
+            print("  Tip: Set COPILOT_OPENROUTER_API_KEY in GitHub Secrets")
 
 
 class TestDataValidation:

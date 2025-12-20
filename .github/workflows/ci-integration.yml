@@ -71,9 +71,9 @@ jobs:
       continue-on-error: true
     
     - name: Test worksheet generation with API (if key available)
-      if: secrets.OPENROUTER_API_KEY != ''
+      if: secrets.COPILOT_OPENROUTER_API_KEY != ''
       env:
-        OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        OPENROUTER_API_KEY: ${{ secrets.COPILOT_OPENROUTER_API_KEY }}
       run: |
         echo "Testing worksheet generation with OpenRouter API..."
         node index.js
