@@ -94,6 +94,32 @@ jobs:
         test -f tests/fixtures/homework_calculus_errors.json && echo "✓ homework_calculus_errors.json exists"
         echo "All fixtures verified!"
     
+    - name: Analyze fixture images with OpenRouter Gemini
+      if: secrets.COPILOT_OPENROUTER_API_KEY != ''
+      env:
+        COPILOT_OPENROUTER_API_KEY: ${{ secrets.COPILOT_OPENROUTER_API_KEY }}
+      run: |
+        echo "Analyzing student homework images with OpenRouter Gemini API..."
+        python tests/scripts/analyze_fixture_images.py
+      continue-on-error: true
+    
+    - name: Generate enhanced test data from image analysis
+      if: secrets.COPILOT_OPENROUTER_API_KEY != ''
+      run: |
+        echo "Generating homework fixtures from analysis results..."
+        python tests/scripts/generate_homework_from_analysis.py
+      continue-on-error: true
+    
+    - name: Upload image analysis results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: image-analysis-results-${{ github.run_id }}
+        path: |
+          tests/fixtures/*.analysis.json
+          tests/fixtures/homework_from_*.json
+        retention-days: 7
+    
     - name: Upload test artifacts
       if: always()
       uses: actions/upload-artifact@v3

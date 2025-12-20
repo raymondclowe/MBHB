@@ -602,6 +602,155 @@ strategy:
 - [Pytest Documentation](https://docs.pytest.org/)
 - [OpenRouter API Documentation](https://openrouter.ai/docs)
 
+## Image Analysis Integration
+
+### Overview
+
+The CI pipeline includes automated analysis of student homework images using OpenRouter's Gemini API. This enriches test data with realistic information extracted from actual student work.
+
+### How It Works
+
+1. **Image Analysis Script** (`tests/scripts/analyze_fixture_images.py`)
+   - Processes all non-annotated student images in `tests/fixtures/`
+   - Sends images to OpenRouter Gemini API for detailed analysis
+   - Extracts information about:
+     - Mathematical topics and IB HL AA levels
+     - Problem types and question numbers
+     - Common mistakes in student work
+     - Difficulty levels
+     - Educational context and assessment
+   - Saves analysis results as `{imagename}.analysis.json`
+
+2. **Homework Generation Script** (`tests/scripts/generate_homework_from_analysis.py`)
+   - Reads analysis JSON files
+   - Generates enhanced homework submission fixtures
+   - Creates `homework_from_{imagename}.json` files
+   - Uses realistic data extracted from actual student work
+
+3. **CI Workflow Integration** (`.github/workflows/ci-integration.yml`)
+   - Runs image analysis when `COPILOT_OPENROUTER_API_KEY` is available
+   - Generates homework fixtures from analysis
+   - Uploads analysis artifacts for review (7-day retention)
+   - Continues even if analysis fails (non-blocking)
+
+### API Configuration
+
+**Endpoint**: `https://openrouter.ai/api/v1/chat/completions`
+
+**Models** (tried in order):
+1. `google/gemini-3-pro-image-preview` (primary)
+2. `google/gemini-3-flash-preview` (fallback)
+
+**Authentication**: Uses `COPILOT_OPENROUTER_API_KEY` secret
+
+**Required Headers**:
+- `Authorization: Bearer $COPILOT_OPENROUTER_API_KEY`
+- `Content-Type: application/json`
+- `HTTP-Referer: https://github.com/raymondclowe/MBHB`
+- `X-Title: MBHB CI Testing`
+
+### Running Locally
+
+To test image analysis on your local machine:
+
+```bash
+# Set API key
+export COPILOT_OPENROUTER_API_KEY="your-key-here"
+
+# Analyze images
+python tests/scripts/analyze_fixture_images.py
+
+# Generate homework fixtures from analysis
+python tests/scripts/generate_homework_from_analysis.py
+
+# Check results
+ls -lh tests/fixtures/*.analysis.json
+ls -lh tests/fixtures/homework_from_*.json
+```
+
+### Image Selection Criteria
+
+The analysis processes images that:
+- ✅ Match pattern: `image_*.jpg`, `image_*.jpeg`, `image_*.png`
+- ✅ Are located in `tests/fixtures/`
+- ❌ Do NOT contain `_annotated` in filename
+- ❌ Do NOT contain `_assistant` in filename
+
+### Analysis Output Format
+
+Each analysis produces a JSON file with the OpenRouter API response, including:
+
+```json
+{
+  "choices": [{
+    "message": {
+      "content": "{\"topic\": \"...\", \"ib_level\": \"...\", ...}"
+    }
+  }],
+  "model": "google/gemini-3-pro-image-preview",
+  "usage": { "prompt_tokens": 123, "completion_tokens": 456 }
+}
+```
+
+The content is parsed to extract structured data for homework generation.
+
+### CI Artifacts
+
+After each CI run with image analysis, the following artifacts are available:
+
+**Artifact: `image-analysis-results-{run_id}`** (7 days retention)
+- `*.analysis.json` - Raw API responses with image analysis
+- `homework_from_*.json` - Generated homework fixtures
+
+**Artifact: `test-outputs-{run_id}`** (7 days retention)
+- Generated worksheets and other test outputs
+- Coverage reports
+- Log files
+
+### Troubleshooting Image Analysis
+
+**Issue: "COPILOT_OPENROUTER_API_KEY environment variable not set"**
+
+Solution:
+- Verify secret is set in GitHub repository settings
+- Check that workflow has `env:` section with the secret
+- For local testing, export the environment variable
+
+**Issue: "All models failed"**
+
+Solution:
+- Check API key is valid and has sufficient credits
+- Verify network connectivity to OpenRouter API
+- Review error messages for specific model failures
+- Try running analysis on fewer images first
+
+**Issue: "Could not parse JSON from analysis"**
+
+Solution:
+- The API may return unstructured text instead of JSON
+- Check the raw analysis file for content
+- Analysis is saved with raw content for manual review
+- The script continues processing other images
+
+### Best Practices
+
+1. **API Usage**
+   - Image analysis only runs when API key is available
+   - Uses fallback models if primary fails
+   - Non-blocking - CI succeeds even if analysis fails
+   - Results are cached as artifacts for review
+
+2. **Cost Management**
+   - Analysis runs only on non-annotated images
+   - Skips images already analyzed (check artifacts first)
+   - Consider running analysis manually for large batches
+
+3. **Data Quality**
+   - Review generated homework fixtures for accuracy
+   - Manually adjust fixtures as needed
+   - Use analysis results to improve test coverage
+   - Keep original analysis files for reference
+
 ## Support
 
 For issues with CI setup:
