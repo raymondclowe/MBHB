@@ -106,7 +106,7 @@ python run.py
 python monitor.py
 ```
 
-Then access the admin panel at: **http://localhost:8050** (or **http://fridge:8050** on Raspberry Pi)
+Then access the admin panel at: **http://localhost:8050** (or **http://your-hostname:8050** for network access)
 
 **Option 2: Worksheet Generator Only**
 
