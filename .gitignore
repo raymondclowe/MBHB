@@ -19,6 +19,9 @@ generated_worksheets/*.html
 # Keep test fixtures
 !tests/fixtures/*.json
 !tests/fixtures/*.html
+# But exclude generated analysis and homework files (CI artifacts)
+tests/fixtures/*.analysis.json
+tests/fixtures/homework_from_*.json
 # CI artifacts
 htmlcov/
 .coverage
